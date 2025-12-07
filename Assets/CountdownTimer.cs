@@ -1,0 +1,99 @@
+﻿using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using System.Collections;
+
+public class CountdownTimer : MonoBehaviour
+{
+    [Header("Timer")]
+    public TextMeshProUGUI timerText;
+
+    [Header("Hint System")]
+    public Button hintButton;
+    public GameObject hintTextPanel;
+    public Button closeHintButton;
+
+    private float timeLeft = 60f;
+    private bool isCounting = false;
+
+    private Coroutine timerCoroutine;
+
+    void Start()
+    {
+        timerText.gameObject.SetActive(false);
+
+        if (hintButton != null)
+            hintButton.gameObject.SetActive(false);
+
+        if (hintTextPanel != null)
+            hintTextPanel.SetActive(false);
+
+        if (hintButton != null)
+            hintButton.onClick.AddListener(ShowHint);
+
+        if (closeHintButton != null)
+            closeHintButton.onClick.AddListener(CloseHint);
+    }
+
+    public void ShowTutorialTimer()
+    {
+        timerText.gameObject.SetActive(true);
+
+        if (hintButton != null)
+            hintButton.gameObject.SetActive(true);
+
+        timeLeft = 60f;
+        UpdateTimerDisplay();
+    }
+
+    public void StartCountdownTutorial()
+    {
+        if (!isCounting)
+            timerCoroutine = StartCoroutine(TutorialCountdown());
+    }
+
+    IEnumerator TutorialCountdown()
+    {
+        isCounting = true;
+
+        while (timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+            UpdateTimerDisplay();
+            yield return null;
+        }
+
+        isCounting = false;
+        timerText.text = "Time’s up!";
+        timerCoroutine = null;
+    }
+
+    void UpdateTimerDisplay()
+    {
+        timerText.text = timeLeft.ToString("0.0");
+    }
+
+    public void StopCountdown()
+    {
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+            timerCoroutine = null;
+        }
+
+        isCounting = false;
+    }
+
+    // ---- Hint System ----
+    public void ShowHint()
+    {
+        if (hintTextPanel != null)
+            hintTextPanel.SetActive(true);
+    }
+
+    public void CloseHint()
+    {
+        if (hintTextPanel != null)
+            hintTextPanel.SetActive(false);
+    }
+}

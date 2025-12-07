@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Room_Algorithm/Room_Algorithm.unity
+    guid: 52fc850de6f37d64dba23a842da662af
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Room_ComputerArchitecture/Room_ComputerArchitecture.unity
+    guid: 182495a6060312f43a8252c462173815
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Room_Network/Room_Network.unity
+    guid: 313fb0af7ec909b4a815766488662d04
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Room_NetworkSecurity/Room_NetworkSecurity.unity
+    guid: 8a074e3c743398f449764e5328e1a1f3
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b1f93f0a0b3c30e44ac848dea24d0fc8
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Room_OOP/Room_OOP.unity
+    guid: 1b36268aacc24ff40842a498b5697e76
+  - enabled: 1
+    path: Assets/Scenes/IntroScene/IntroScene.unity
+    guid: 10898cfdfd26a584aa1814da48ea5962
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_UseUCBPForAssetBundles: 0
