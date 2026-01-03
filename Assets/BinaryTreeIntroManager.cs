@@ -36,25 +36,14 @@ public class BinaryTreeIntroManager : MonoBehaviour
         "Good luck and have fun!"
     };
 
+    public NPCIntroDialogue npcIntro;
+
     private int index = 0;
     private bool isTyping = false;
     private bool skipTyping = false;
 
     private int cardStep = 0;
     private bool endingStarted = false;
-
-
-    // ⭕ Register button automatically
-    void OnEnable()
-    {
-        continueButton.onClick.AddListener(CloseIntro);
-    }
-
-    void OnDisable()
-    {
-        continueButton.onClick.RemoveListener(CloseIntro);
-    }
-
 
     void Start()
     {
@@ -184,9 +173,12 @@ public class BinaryTreeIntroManager : MonoBehaviour
         continueButton.gameObject.SetActive(true);
     }
 
-    public void CloseIntro()
+    public void ClosePanel()
     {
-        Debug.Log("CloseIntro() called!");
         introPanel.SetActive(false);
+
+        // 🔥 เรียกให้ NPC เล่น intro ต่อ
+        if (npcIntro != null)
+            npcIntro.StartIntro();
     }
 }

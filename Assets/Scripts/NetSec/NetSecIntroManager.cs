@@ -11,7 +11,7 @@ public class PlayfairIntroManager : MonoBehaviour
     [Header("Description Text")]
     public TextMeshProUGUI descriptionText;
 
-    [Header("Cards (with images)")]
+    [Header("Cards")]
     public GameObject keySquareCard;
     public GameObject ruleCard;
     public GameObject ruletwoCard;
@@ -26,37 +26,26 @@ public class PlayfairIntroManager : MonoBehaviour
     {
         "Welcome to the Network Security Room!",
         "Before you begin the puzzle, let's learn the basics of the Playfair Cipher.",
-        "Playfair Cipher encrypts text by splitting it into letter pairs (digraphs).",
+        "Playfair Cipher encrypts text by splitting it into letter pairs.",
         "It uses a 5x5 key square generated from a keyword.",
-        "Let's explore step-by-step how Playfair works."
+        "Let's explore how Playfair works step by step."
     };
 
     [Header("Ending Lines")]
     public string[] endingLines =
     {
         "Great! Now you understand the structure of the Playfair Cipher.",
-        "Use this knowledge to solve the upcoming encryption puzzle!",
+        "Use this knowledge to solve the encryption puzzle.",
         "Good luck, agent."
     };
 
+    public NPCIntroDialogue npcIntro;
+
     private int index = 0;
     private int cardStep = 0;
-
     private bool isTyping = false;
     private bool skipTyping = false;
     private bool endingStarted = false;
-
-
-    void OnEnable()
-    {
-        continueButton.onClick.AddListener(CloseIntro);
-    }
-
-    void OnDisable()
-    {
-        continueButton.onClick.RemoveListener(CloseIntro);
-    }
-
 
     void Start()
     {
@@ -64,6 +53,7 @@ public class PlayfairIntroManager : MonoBehaviour
 
         keySquareCard.SetActive(false);
         ruleCard.SetActive(false);
+        ruletwoCard.SetActive(false);
         encryptCard.SetActive(false);
         decryptCard.SetActive(false);
 
@@ -71,7 +61,6 @@ public class PlayfairIntroManager : MonoBehaviour
 
         StartCoroutine(PlayIntro());
     }
-
 
     void Update()
     {
@@ -95,31 +84,18 @@ public class PlayfairIntroManager : MonoBehaviour
         }
     }
 
-
-    // ----------------- MAIN INTRO -------------------
     IEnumerator PlayIntro()
     {
         while (index < introLines.Length)
         {
             yield return StartCoroutine(TypeLine(introLines[index]));
-
-            float t = 0f;
-            float waitTime = 0.5f;
-
-            while (t < waitTime)
-            {
-                if (Input.GetMouseButtonDown(0)) break;
-                t += Time.deltaTime;
-                yield return null;
-            }
-
+            yield return WaitForClick();
             index++;
         }
 
         ShowNextCard();
     }
 
-    // ----------------- TYPEWRITER EFFECT ------------
     IEnumerator TypeLine(string line)
     {
         descriptionText.text = "";
@@ -141,8 +117,12 @@ public class PlayfairIntroManager : MonoBehaviour
         isTyping = false;
     }
 
+    IEnumerator WaitForClick()
+    {
+        while (!Input.GetMouseButtonDown(0))
+            yield return null;
+    }
 
-    // ----------------- CARDS FLOW -------------------
     void ShowNextCard()
     {
         descriptionText.text = "";
@@ -154,45 +134,18 @@ public class PlayfairIntroManager : MonoBehaviour
         encryptCard.SetActive(false);
         decryptCard.SetActive(false);
 
-        if (cardStep == 1)
-        {
-            keySquareCard.SetActive(true);     // รูปตาราง 5x5
-            return;
-        }
-
-        if (cardStep == 2)
-        {
-            ruleCard.SetActive(true);          // รูปกฎ row/column/rectangle
-            return;
-        }
-
-        if (cardStep == 3)
-        {
-            ruletwoCard.SetActive(true);          // รูปกฎ row/column/rectangle
-            return;
-        }
-
-        if (cardStep == 4)
-        {
-            encryptCard.SetActive(true);       // ตัวอย่าง encryption
-            return;
-        }
-
-        if (cardStep == 5)
-        {
-            decryptCard.SetActive(true);       // ตัวอย่าง decryption
-            return;
-        }
-
-        if (!endingStarted)
+        if (cardStep == 1) keySquareCard.SetActive(true);
+        else if (cardStep == 2) ruleCard.SetActive(true);
+        else if (cardStep == 3) ruletwoCard.SetActive(true);
+        else if (cardStep == 4) encryptCard.SetActive(true);
+        else if (cardStep == 5) decryptCard.SetActive(true);
+        else if (!endingStarted)
         {
             endingStarted = true;
             StartCoroutine(PlayEnding());
         }
     }
 
-
-    // ----------------- ENDING -----------------------
     IEnumerator PlayEnding()
     {
         descriptionText.text = "";
@@ -200,19 +153,19 @@ public class PlayfairIntroManager : MonoBehaviour
         foreach (string line in endingLines)
         {
             yield return StartCoroutine(TypeLine(line));
-            yield return new WaitForSeconds(0.4f);
-
-            while (!Input.GetMouseButtonDown(0))
-                yield return null;
+            yield return WaitForClick();
         }
 
         continueButton.gameObject.SetActive(true);
     }
 
-
-    // ----------------- CLOSE PANEL -------------------
-    public void CloseIntro()
+    // 🔥 ปุ่ม Continue เรียกฟังก์ชันนี้
+    public void ClosePanel()
     {
         introPanel.SetActive(false);
+
+        // 🔥 เรียกให้ NPC เล่น intro ต่อ
+        if (npcIntro != null)
+            npcIntro.StartIntro();
     }
 }

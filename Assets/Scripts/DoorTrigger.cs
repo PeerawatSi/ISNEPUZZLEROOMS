@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorTrigger : MonoBehaviour
 {
+
     // ใส่ชื่อ Scene ของแต่ละห้อง
     public string[] roomNames = new string[]
     {

@@ -35,6 +35,7 @@ public class CountdownTimer : MonoBehaviour
             closeHintButton.onClick.AddListener(CloseHint);
     }
 
+    // 🔹 ใช้กับทุกห้องได้ (tutorial / netsec)
     public void ShowTutorialTimer()
     {
         timerText.gameObject.SetActive(true);
@@ -42,7 +43,7 @@ public class CountdownTimer : MonoBehaviour
         if (hintButton != null)
             hintButton.gameObject.SetActive(true);
 
-        timeLeft = 60f;
+        timeLeft = 300f;
         UpdateTimerDisplay();
     }
 
@@ -56,17 +57,22 @@ public class CountdownTimer : MonoBehaviour
     {
         isCounting = true;
 
-        while (timeLeft > 0)
+        while (timeLeft > 0 && isCounting)
         {
             timeLeft -= Time.deltaTime;
             UpdateTimerDisplay();
             yield return null;
         }
 
+        if (timeLeft <= 0)
+        {
+            timerText.text = "Time’s up!";
+        }
+
         isCounting = false;
-        timerText.text = "Time’s up!";
         timerCoroutine = null;
     }
+
 
     void UpdateTimerDisplay()
     {
@@ -75,14 +81,15 @@ public class CountdownTimer : MonoBehaviour
 
     public void StopCountdown()
     {
+        isCounting = false;
+
         if (timerCoroutine != null)
         {
             StopCoroutine(timerCoroutine);
             timerCoroutine = null;
         }
-
-        isCounting = false;
     }
+
 
     // ---- Hint System ----
     public void ShowHint()
@@ -96,4 +103,14 @@ public class CountdownTimer : MonoBehaviour
         if (hintTextPanel != null)
             hintTextPanel.SetActive(false);
     }
+
+    public void ReduceTime(float seconds)
+    {
+        timeLeft -= seconds;
+        if (timeLeft < 0)
+            timeLeft = 0;
+
+        UpdateTimerDisplay();
+    }
+
 }
