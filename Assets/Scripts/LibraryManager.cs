@@ -7,7 +7,7 @@ public class LibraryManager : MonoBehaviour
     public int booksToOpen = 5;
 
     public int minNumber = 1;
-    public int maxNumber = 99;
+    public int maxNumber = 50;
 
     private List<int> usedNumbers = new List<int>();
 
