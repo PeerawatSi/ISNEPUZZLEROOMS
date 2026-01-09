@@ -7,15 +7,21 @@ public class AlgoDialogue : MonoBehaviour
     [Header("UI Elements")]
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
-    public GameObject okButton;
 
     [Header("Timer System")]
     public CountdownTimer countdownTimer;
 
+    // ================== STATE ==================
     private bool timerStarted = false;
+    private bool hasPlayed = false;
 
+    private int currentIndex = 0;
+    private bool isTyping = false;
+    private bool skipTyping = false;
 
+    private Coroutine activeCoroutine;
 
+    // ================== INTRO DIALOGUE ==================
     private string[] dialogueLines =
     {
         "Welcome to the Algorithm Room!",
@@ -27,27 +33,16 @@ public class AlgoDialogue : MonoBehaviour
         "Find those 5 numbers and use them to build the correct tree.",
         "Be careful — the structure of the tree matters.",
         "Once the timer starts, the challenge begins.",
+        "You can DOUBLE CLICK on the shelf to see it closer",
         "Good luck!"
     };
 
-
-    private int currentIndex = 0;
-    private bool hasPlayed = false;
-
-    private bool isTyping = false;
-    private bool skipTyping = false;
-
-    private Coroutine activeCoroutine = null;
-
-
     void Start()
     {
-        if (dialoguePanel != null)
-            dialoguePanel.SetActive(false);
+        dialoguePanel.SetActive(false);
     }
 
-
-    // เรียกเมื่อคลิก NPC
+    // ================== OPEN ==================
     public void OpenPanel()
     {
         if (hasPlayed) return;
@@ -56,87 +51,48 @@ public class AlgoDialogue : MonoBehaviour
         currentIndex = 0;
 
         dialoguePanel.SetActive(true);
-
         StartDialogueCoroutine(PlayDialogue());
     }
-
 
     void Update()
     {
         if (!dialoguePanel.activeSelf) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isTyping)
         {
-            if (isTyping)
-                skipTyping = true;
-            else
-                currentIndex++;
+            skipTyping = true;
         }
     }
 
-
-    // ---------- ฟังก์ชันจัดการ coroutine ป้องกันซ้อน ----------
+    // ================== COROUTINE CONTROL ==================
     void StartDialogueCoroutine(IEnumerator routine)
     {
-        // ถ้ามี coroutine เดิมกำลังทำงาน → หยุดก่อน
         if (activeCoroutine != null)
             StopCoroutine(activeCoroutine);
 
         activeCoroutine = StartCoroutine(routine);
     }
-    // ------------------------------------------------------------
 
-
+    // ================== INTRO FLOW ==================
     IEnumerator PlayDialogue()
     {
         while (currentIndex < dialogueLines.Length)
         {
             yield return StartCoroutine(TypeLine(dialogueLines[currentIndex]));
 
-            float waitTime = 1.2f;
-            float timer = 0f;
-
-            while (timer < waitTime)
-            {
-                if (!skipTyping && Input.GetMouseButtonDown(0))
-                    break;
-
-                timer += Time.deltaTime;
-                yield return null;
-            }
-
-            
+            // ⭐ ประโยคสุดท้าย → เริ่ม Timer ทันที
             if (currentIndex == dialogueLines.Length - 1)
             {
                 StartTimerIfNeeded();
+                CloseDialogue();
+                yield break;
             }
 
+            // รอคลิกเพื่อไปประโยคถัดไป
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             currentIndex++;
         }
-
-        ClosePanel();
     }
-
-
-
-
-    void StartTimerIfNeeded()
-    {
-        if (timerStarted) return;
-
-        timerStarted = true;
-
-        if (countdownTimer != null)
-        {
-            countdownTimer.ShowTutorialTimer();
-            countdownTimer.StartCountdownTutorial();
-        }
-
-        Debug.Log("Timer Started");
-    }
-
-
-
 
     IEnumerator TypeLine(string line)
     {
@@ -159,57 +115,57 @@ public class AlgoDialogue : MonoBehaviour
         isTyping = false;
     }
 
-
-    public void ClosePanel()
+    // ================== TIMER ==================
+    void StartTimerIfNeeded()
     {
-        if (activeCoroutine != null)
+        if (timerStarted) return;
+
+        timerStarted = true;
+        Debug.Log("🔥 START TIMER (ALGO)");
+
+        if (countdownTimer != null)
         {
-            StopCoroutine(activeCoroutine);
-            activeCoroutine = null;
+            countdownTimer.gameObject.SetActive(true);
+            countdownTimer.ShowTutorialTimer();
+            countdownTimer.timerText.gameObject.SetActive(true); // บังคับ
+            countdownTimer.StartCountdownTutorial();
         }
-
-        dialoguePanel.SetActive(false);
-        dialogueText.text = "";
-
-        // ถ้าปิด panel ก่อนจบ dialogue → เริ่มเวลา
-        StartTimerIfNeeded();
     }
 
+    // ================== CLOSE ==================
+    void CloseDialogue()
+    {
+        if (activeCoroutine != null)
+            StopCoroutine(activeCoroutine);
 
+        activeCoroutine = null;
+        dialoguePanel.SetActive(false);
+        dialogueText.text = "";
+    }
 
-    // ---------------- Dialogue หลังตอบถูก -------------------
+    // =====================================================
+    // =============== AFTER INTRO DIALOGUES =================
+    // =====================================================
 
     public void ContinueAfterCorrectAnswer()
     {
+        ForceStop();
         dialoguePanel.SetActive(true);
-
-        // หยุด dialogue เดิมก่อน (สำคัญมาก)
-        ClosePanel();
-        dialoguePanel.SetActive(true);
-
-        StartDialogueCoroutine(PlayAfterCorrectAnswer());
+        activeCoroutine = StartCoroutine(PlayAfterCorrectAnswer());
     }
-
-    // ================== Dialogue ตอนตอบถูก ==================
 
     IEnumerator PlayAfterCorrectAnswer()
     {
-        yield return StartCoroutine(TypeLine("Yor are SOO GOOOOOD!!!"));
-        yield return new WaitForSeconds(0.4f);
-
-        //yield return StartCoroutine(TypeLine("Let’s open the door and begin your ISNE journey!"));
-        //yield return new WaitForSeconds(0.4f);
-
-        ClosePanel();
+        yield return StartCoroutine(TypeLine("You are SOOO GOOOOD!!!"));
+        yield return new WaitForSeconds(0.6f);
+        CloseDialogue();
     }
-
-    // ================== Dialogue ตอนตอบผิด ==================
 
     public void ShowWrongAnswer()
     {
-        ClosePanel();
+        ForceStop();
         dialoguePanel.SetActive(true);
-        StartDialogueCoroutine(PlayWrongAnswer());
+        activeCoroutine = StartCoroutine(PlayWrongAnswer());
     }
 
     IEnumerator PlayWrongAnswer()
@@ -220,27 +176,21 @@ public class AlgoDialogue : MonoBehaviour
         yield return StartCoroutine(TypeLine("Check the tree structure carefully and try again."));
         yield return new WaitForSeconds(1.2f);
 
-        ClosePanel();
+        CloseDialogue();
     }
-
-
-    // ================== Dialogue ตอนเจอเลข ==================
 
     public void ShowFoundNumberDialogue(int number)
     {
-        // ปิดของเดิมก่อน กันซ้อน
-        ClosePanel();
-
+        ForceStop();
         dialoguePanel.SetActive(true);
-        StartDialogueCoroutine(PlayFoundNumber(number));
+        activeCoroutine = StartCoroutine(PlayFoundNumber(number));
     }
 
     IEnumerator PlayFoundNumber(int number)
     {
         yield return StartCoroutine(TypeLine($"You found Number : {number}"));
         yield return new WaitForSeconds(1.2f);
-
-        ClosePanel();
+        CloseDialogue();
     }
 
     public void ShowTreeInstruction(AlgoTreeType type)
@@ -250,38 +200,39 @@ public class AlgoDialogue : MonoBehaviour
 
     IEnumerator DelayedTreeInstruction(AlgoTreeType type)
     {
-        yield return new WaitForSeconds(2f); // รอให้ dialogue เจอเลขจบ
+        yield return new WaitForSeconds(2f);
 
-        ClosePanel();
+        ForceStop();
         dialoguePanel.SetActive(true);
-
-        StartDialogueCoroutine(PlayTreeInstruction(type));
+        activeCoroutine = StartCoroutine(PlayTreeInstruction(type));
     }
-
 
     IEnumerator PlayTreeInstruction(AlgoTreeType type)
     {
-        string line = "";
-
-        switch (type)
-        {
-            case AlgoTreeType.BST:
-                line = "Now, arrange them into a Binary Search Tree.";
-                break;
-
-            case AlgoTreeType.Balanced:
-                line = "Now, arrange them into a Balanced Binary Tree.";
-                break;
-        }
+        string line =
+            type == AlgoTreeType.BST
+            ? "Now, arrange them into a Binary Search Tree."
+            : "Now, arrange them into a Balanced Binary Tree.";
 
         yield return StartCoroutine(TypeLine(line));
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.4f);
 
-        ClosePanel();
+        yield return StartCoroutine(
+            TypeLine("Go arrange the numbers on the board at the back of the room!")
+        );
+        yield return new WaitForSeconds(1.2f);
+
+        CloseDialogue();
     }
 
 
+    void ForceStop()
+    {
+        if (activeCoroutine != null)
+            StopCoroutine(activeCoroutine);
 
-
-
+        activeCoroutine = null;
+        isTyping = false;
+        skipTyping = false;
+    }
 }

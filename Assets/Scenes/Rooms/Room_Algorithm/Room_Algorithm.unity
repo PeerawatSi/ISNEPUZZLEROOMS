@@ -1424,11 +1424,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 861836970}
+  - {fileID: 1199366756}
+  - {fileID: 1193976034}
   - {fileID: 99052804}
   - {fileID: 125523020}
   - {fileID: 368129330}
-  - {fileID: 1199366756}
-  - {fileID: 1193976034}
   m_Father: {fileID: 708813326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2781,7 +2781,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368129329}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9351,15 +9351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52e1c6cdc83622438e7ad0cbdcd85aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootNode: {fileID: 1968558366}
-  leftNode: {fileID: 1309866274}
-  rightNode: {fileID: 1546928218}
-  leftLeftNode: {fileID: 2087327276}
-  leftRightNode: {fileID: 512367232}
-  rightLeftNode: {fileID: 284134174}
-  rightRightNode: {fileID: 395468666}
-  nodes: []
-  currentIndex: 0
 --- !u!1 &1194456065
 GameObject:
   m_ObjectHideFlags: 0
@@ -9465,7 +9456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1199366756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15962,7 +15953,7 @@ MonoBehaviour:
       - m_Target: {fileID: 861836972}
         m_TargetAssemblyTypeName: AlgoDialogue, Assembly-CSharp
         m_MethodName: ClosePanel
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

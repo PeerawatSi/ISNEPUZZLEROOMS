@@ -20,7 +20,7 @@ public class CountdownTimer : MonoBehaviour
 
     void Start()
     {
-        timerText.gameObject.SetActive(false);
+        //timerText.gameObject.SetActive(false);
 
         if (hintButton != null)
             hintButton.gameObject.SetActive(false);
@@ -35,7 +35,7 @@ public class CountdownTimer : MonoBehaviour
             closeHintButton.onClick.AddListener(CloseHint);
     }
 
-    // 🔹 ใช้กับทุกห้องได้ (tutorial / netsec)
+    // 🔹 ใช้กับทุกห้องได้ 
     public void ShowTutorialTimer()
     {
         timerText.gameObject.SetActive(true);
@@ -48,10 +48,13 @@ public class CountdownTimer : MonoBehaviour
     }
 
     public void StartCountdownTutorial()
-    {
-        if (!isCounting)
-            timerCoroutine = StartCoroutine(TutorialCountdown());
-    }
+{
+    Debug.Log("StartCountdownTutorial called, isCounting = " + isCounting);
+
+    if (!isCounting)
+        timerCoroutine = StartCoroutine(TutorialCountdown());
+}
+
 
     IEnumerator TutorialCountdown()
     {
