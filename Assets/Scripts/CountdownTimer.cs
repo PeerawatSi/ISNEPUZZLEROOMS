@@ -13,7 +13,7 @@ public class CountdownTimer : MonoBehaviour
     public GameObject hintTextPanel;
     public Button closeHintButton;
 
-    private float timeLeft = 60f;
+    public float timeLeft = 60f;
     private bool isCounting = false;
 
     private Coroutine timerCoroutine;
@@ -43,7 +43,7 @@ public class CountdownTimer : MonoBehaviour
         if (hintButton != null)
             hintButton.gameObject.SetActive(true);
 
-        timeLeft = 300f;
+        // timeLeft = 300f;
         UpdateTimerDisplay();
     }
 

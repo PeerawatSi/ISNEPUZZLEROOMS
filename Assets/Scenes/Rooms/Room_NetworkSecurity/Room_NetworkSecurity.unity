@@ -1946,6 +1946,7 @@ MonoBehaviour:
   hintButton: {fileID: 301223740}
   hintTextPanel: {fileID: 687294145}
   closeHintButton: {fileID: 1068504035}
+  timeLeft: 60
 --- !u!114 &301223740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5774,6 +5775,7 @@ MonoBehaviour:
   hintButton: {fileID: 301223740}
   hintTextPanel: {fileID: 687294145}
   closeHintButton: {fileID: 1068504035}
+  timeLeft: 300
 --- !u!114 &803653647
 MonoBehaviour:
   m_ObjectHideFlags: 0
