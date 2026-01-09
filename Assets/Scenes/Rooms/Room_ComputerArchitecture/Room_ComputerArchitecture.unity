@@ -3017,7 +3017,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1968922724}
         m_TargetAssemblyTypeName: ComacrhDialogue, Assembly-CSharp
-        m_MethodName: ClosePanel
+        m_MethodName: OnCloseButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6002,7 +6002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &679184148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6063,10 +6063,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 679184148}
+        m_TargetAssemblyTypeName: CountdownTimer, Assembly-CSharp
+        m_MethodName: ShowHint
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8152,7 +8152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1015554270
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15185,6 +15185,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1052090374}
   countdownTimer: {fileID: 1015554271}
   puzzleManager: {fileID: 1669779522}
+  closeButton: {fileID: 228029876}
 --- !u!1001 &1979054657
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,6 +14,9 @@ public class ComacrhDialogue : MonoBehaviour
     [Header("Puzzle")]
     public LogicGatePuzzleManager puzzleManager;
 
+    [Header("Optional UI")]
+    public GameObject closeButton;   // ⭐ ปุ่ม X
+
     // ================== INTRO DIALOGUE ==================
 
     private string[] dialogueLines =
@@ -33,7 +36,7 @@ public class ComacrhDialogue : MonoBehaviour
 
     private int currentIndex = 0;
     private bool hasPlayed = false;
-    private bool puzzleStarted = false;
+    private bool timerStarted = false;
 
     private bool isTyping = false;
     private bool skipTyping = false;
@@ -45,6 +48,9 @@ public class ComacrhDialogue : MonoBehaviour
     void Start()
     {
         dialoguePanel.SetActive(false);
+
+        if (closeButton != null)
+            closeButton.SetActive(true);
     }
 
     // ================== OPEN NPC ==================
@@ -89,11 +95,12 @@ public class ComacrhDialogue : MonoBehaviour
         {
             yield return StartCoroutine(TypeLine(dialogueLines[currentIndex]));
 
-            // ประโยคสุดท้าย → เริ่ม puzzle
+            // ⭐ ประโยคสุดท้าย → auto start
             if (currentIndex == dialogueLines.Length - 1)
             {
-                StartPuzzleAndTimer();
-                yield break; // 🔥 หยุด dialogue ทันที
+                StartTimerAndPuzzle();
+                CloseDialogue();
+                yield break;
             }
 
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
@@ -122,15 +129,14 @@ public class ComacrhDialogue : MonoBehaviour
         isTyping = false;
     }
 
-    // ================== START PUZZLE ==================
+    // ================== TIMER + PUZZLE ==================
 
-    void StartPuzzleAndTimer()
+    void StartTimerAndPuzzle()
     {
-        if (puzzleStarted) return;
-        puzzleStarted = true;
+        if (timerStarted) return;
+        timerStarted = true;
 
-        ForceStopDialogue();
-        CloseDialogue();
+        Debug.Log("START COMARCH TIMER + PUZZLE");
 
         if (countdownTimer != null)
         {
@@ -145,20 +151,28 @@ public class ComacrhDialogue : MonoBehaviour
         }
     }
 
-    // ================== CLOSE ==================
+    // ================== CLOSE BUTTON ==================
+
+    // 🔘 เรียกจากปุ่ม X
+    public void OnCloseButtonPressed()
+    {
+        // ถ้าผู้เล่นกดปิดก่อน intro จบ → เริ่มเกมทันที
+        StartTimerAndPuzzle();
+        CloseDialogue();
+    }
 
     void CloseDialogue()
     {
+        ForceStopDialogue();
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
     }
 
-    // ================== CORRECT (แต่ละเฟรม) ==================
+    // ================== CORRECT (ต่อเฟรม) ==================
 
     public void ShowCorrectFeedback()
     {
         ForceStopDialogue();
-
         dialoguePanel.SetActive(true);
         activeCoroutine = StartCoroutine(PlayCorrectFeedback());
     }
@@ -170,12 +184,11 @@ public class ComacrhDialogue : MonoBehaviour
         CloseDialogue();
     }
 
-    // ================== FINAL (ครบทุกเฟรม) ==================
+    // ================== FINAL ==================
 
     public void ContinueAfterCorrectAnswer()
     {
         ForceStopDialogue();
-
         dialoguePanel.SetActive(true);
         activeCoroutine = StartCoroutine(PlayAfterCorrectAnswer());
     }
