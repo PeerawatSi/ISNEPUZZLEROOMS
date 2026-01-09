@@ -398,13 +398,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1669779522}
         m_TargetAssemblyTypeName: LogicGatePuzzleManager, Assembly-CSharp
         m_MethodName: Answer
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
-          m_StringArgument: '"Nor"'
+          m_StringArgument: '"nor"'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &16791049
@@ -1829,13 +1829,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133571013}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02811232, y: -0, z: -0, w: 0.99960476}
-  m_LocalPosition: {x: -0.77647364, y: 1.77, z: -9.88}
+  m_LocalRotation: {x: 0.14853644, y: -0.12725651, z: 0.012010117, w: 0.9806113}
+  m_LocalPosition: {x: 0.56, y: 2.78, z: -10.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 3.222, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.12, y: -14.917, z: -0.854}
 --- !u!114 &133571017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1966,13 +1966,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1669779522}
         m_TargetAssemblyTypeName: LogicGatePuzzleManager, Assembly-CSharp
         m_MethodName: Answer
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
-          m_StringArgument: '"Xnor"'
+          m_StringArgument: '"xnor"'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &140543478
@@ -2749,13 +2749,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1669779522}
         m_TargetAssemblyTypeName: LogicGatePuzzleManager, Assembly-CSharp
         m_MethodName: Answer
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
-          m_StringArgument: '"Nand"'
+          m_StringArgument: '"nand"'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &221795018
@@ -4694,13 +4694,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1669779522}
         m_TargetAssemblyTypeName: LogicGatePuzzleManager, Assembly-CSharp
         m_MethodName: Answer
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: '"Not"'
+          m_StringArgument: '"not"'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &469232176
@@ -6951,7 +6951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9039d479f37a33c4a81362d04791c6b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.62
+      value: 3.79
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9039d479f37a33c4a81362d04791c6b0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12072,13 +12072,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1669779522}
         m_TargetAssemblyTypeName: LogicGatePuzzleManager, Assembly-CSharp
         m_MethodName: Answer
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: '"Or"'
+          m_StringArgument: '"or"'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1393592445
@@ -12262,13 +12262,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1669779522}
         m_TargetAssemblyTypeName: LogicGatePuzzleManager, Assembly-CSharp
         m_MethodName: Answer
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: '"And"'
+          m_StringArgument: '"and"'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1443816135
@@ -12447,7 +12447,7 @@ Transform:
   m_GameObject: {fileID: 1453547397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.05}
+  m_LocalPosition: {x: 0, y: 0.29, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12613,11 +12613,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 566a42721c548c54cb9bc534f063aab3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4408516
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 566a42721c548c54cb9bc534f063aab3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2027
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 566a42721c548c54cb9bc534f063aab3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12625,7 +12625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 566a42721c548c54cb9bc534f063aab3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2656
+      value: 1.49
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 566a42721c548c54cb9bc534f063aab3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12853,7 +12853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 597491043309355956, guid: 86dfe1cfb54b4dc44998d50dab9919d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.27
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 597491043309355956, guid: 86dfe1cfb54b4dc44998d50dab9919d7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13493,19 +13493,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logicGates:
-  - gateName: and
+  - gateType: 0
     gateSprite: {fileID: 21300000, guid: ef12d4a39bd5b80439c74f2c99174c2b, type: 3}
-  - gateName: nand
-    gateSprite: {fileID: 21300000, guid: f27a7af9ebb5ca940b9608ba0ede30cd, type: 3}
-  - gateName: or
+  - gateType: 1
     gateSprite: {fileID: 21300000, guid: 69c8bf7c38cfc124fb75fc023bf575f7, type: 3}
-  - gateName: not
+  - gateType: 2
     gateSprite: {fileID: 21300000, guid: 0e9850af474787b4782f6d4687c81263, type: 3}
-  - gateName: nor
+  - gateType: 3
+    gateSprite: {fileID: 21300000, guid: f27a7af9ebb5ca940b9608ba0ede30cd, type: 3}
+  - gateType: 4
     gateSprite: {fileID: 21300000, guid: 324e6c1e66f270c44a7bad7af3627e13, type: 3}
-  - gateName: xor
+  - gateType: 5
     gateSprite: {fileID: 21300000, guid: 118fd0936369ba6429812efea67669da, type: 3}
-  - gateName: xnor
+  - gateType: 6
     gateSprite: {fileID: 21300000, guid: 3803332f5ea68c2438b0c033c7880767, type: 3}
   frame1Renderer: {fileID: 1453547398}
   frame2Renderer: {fileID: 504673700}
@@ -13518,6 +13518,8 @@ MonoBehaviour:
   - {fileID: 16791048}
   - {fileID: 2129055178}
   - {fileID: 140543477}
+  puzzleStarted: 0
+  dialogue: {fileID: 1968922724}
 --- !u!4 &1669779523
 Transform:
   m_ObjectHideFlags: 0
@@ -15181,8 +15183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 1968922722}
   dialogueText: {fileID: 1052090374}
-  okButton: {fileID: 228029876}
   countdownTimer: {fileID: 1015554271}
+  puzzleManager: {fileID: 1669779522}
 --- !u!1001 &1979054657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15402,7 +15404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 597491043309355956, guid: 86dfe1cfb54b4dc44998d50dab9919d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.32
+      value: 2.29
       objectReference: {fileID: 0}
     - target: {fileID: 597491043309355956, guid: 86dfe1cfb54b4dc44998d50dab9919d7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16507,13 +16509,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1669779522}
         m_TargetAssemblyTypeName: LogicGatePuzzleManager, Assembly-CSharp
         m_MethodName: Answer
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
-          m_StringArgument: '"Xor"'
+          m_StringArgument: '"xor"'
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2129055179

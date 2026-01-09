@@ -7,37 +7,48 @@ public class ComacrhDialogue : MonoBehaviour
     [Header("UI Elements")]
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
-    public GameObject okButton;
 
     [Header("Timer System")]
     public CountdownTimer countdownTimer;
 
+    [Header("Puzzle")]
+    public LogicGatePuzzleManager puzzleManager;
+
+    // ================== INTRO DIALOGUE ==================
+
     private string[] dialogueLines =
     {
-        "Welcome to the Computer Architecture Room!",
-        "Logic gates are the basic building blocks of digital circuits.",
-        "Each gate takes inputs (0 or 1) and produces one output.",
-        "Different gates behave differently depending on their logic.",
-        "Let's review the three basic gates before you start the puzzle."
+        "Welcome to the Computer Architecture Room.",
+        "This room will test your understanding of logic gates.",
+        "Logic gates are the foundation of all digital systems.",
+        "Each gate receives binary inputs — either 0 or 1.",
+        "Based on its logic, it produces a specific output.",
+        "Different gates behave differently, even with the same inputs.",
+        "In front of you, you will see logic gate symbols.",
+        "Your task is to identify each gate correctly.",
+        "Choose the correct answer before time runs out.",
+        "Focus carefully...",
+        "Let’s begin the logic challenge!"
     };
 
     private int currentIndex = 0;
     private bool hasPlayed = false;
+    private bool puzzleStarted = false;
 
     private bool isTyping = false;
     private bool skipTyping = false;
 
-    private Coroutine activeCoroutine = null;
+    private Coroutine activeCoroutine;
 
+    // ================== START ==================
 
     void Start()
     {
-        if (dialoguePanel != null)
-            dialoguePanel.SetActive(false);
+        dialoguePanel.SetActive(false);
     }
 
+    // ================== OPEN NPC ==================
 
-    // เรียกเมื่อคลิก NPC
     public void OpenPanel()
     {
         if (hasPlayed) return;
@@ -46,10 +57,10 @@ public class ComacrhDialogue : MonoBehaviour
         currentIndex = 0;
 
         dialoguePanel.SetActive(true);
-
         StartDialogueCoroutine(PlayDialogue());
     }
 
+    // ================== UPDATE ==================
 
     void Update()
     {
@@ -59,23 +70,18 @@ public class ComacrhDialogue : MonoBehaviour
         {
             if (isTyping)
                 skipTyping = true;
-            else
-                currentIndex++;
         }
     }
 
+    // ================== COROUTINE CONTROL ==================
 
-    // ---------- ฟังก์ชันจัดการ coroutine ป้องกันซ้อน ----------
     void StartDialogueCoroutine(IEnumerator routine)
     {
-        // ถ้ามี coroutine เดิมกำลังทำงาน → หยุดก่อน
-        if (activeCoroutine != null)
-            StopCoroutine(activeCoroutine);
-
+        ForceStopDialogue();
         activeCoroutine = StartCoroutine(routine);
     }
-    // ------------------------------------------------------------
 
+    // ================== INTRO DIALOGUE ==================
 
     IEnumerator PlayDialogue()
     {
@@ -83,35 +89,17 @@ public class ComacrhDialogue : MonoBehaviour
         {
             yield return StartCoroutine(TypeLine(dialogueLines[currentIndex]));
 
-            // เริ่มจับเวลากลางบท
-            if (currentIndex == 8)
+            // ประโยคสุดท้าย → เริ่ม puzzle
+            if (currentIndex == dialogueLines.Length - 1)
             {
-                if (countdownTimer != null)
-                {
-                    countdownTimer.ShowTutorialTimer();
-                    countdownTimer.StartCountdownTutorial();
-                }
+                StartPuzzleAndTimer();
+                yield break; // 🔥 หยุด dialogue ทันที
             }
 
-            float waitTime = 1.2f;
-            float timer = 0f;
-
-            while (timer < waitTime)
-            {
-                if (!skipTyping && Input.GetMouseButtonDown(0))
-                    break;
-
-                timer += Time.deltaTime;
-                yield return null;
-            }
-
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             currentIndex++;
         }
-
-        ClosePanel();
     }
-
-
 
     IEnumerator TypeLine(string line)
     {
@@ -134,42 +122,90 @@ public class ComacrhDialogue : MonoBehaviour
         isTyping = false;
     }
 
+    // ================== START PUZZLE ==================
 
-    public void ClosePanel()
+    void StartPuzzleAndTimer()
     {
-        if (activeCoroutine != null)
+        if (puzzleStarted) return;
+        puzzleStarted = true;
+
+        ForceStopDialogue();
+        CloseDialogue();
+
+        if (countdownTimer != null)
         {
-            StopCoroutine(activeCoroutine);
-            activeCoroutine = null;
+            countdownTimer.gameObject.SetActive(true);
+            countdownTimer.ShowTutorialTimer();
+            countdownTimer.StartCountdownTutorial();
         }
 
+        if (puzzleManager != null)
+        {
+            puzzleManager.StartPuzzle();
+        }
+    }
+
+    // ================== CLOSE ==================
+
+    void CloseDialogue()
+    {
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
     }
 
+    // ================== CORRECT (แต่ละเฟรม) ==================
 
-    // ---------------- Dialogue หลังตอบถูก -------------------
+    public void ShowCorrectFeedback()
+    {
+        ForceStopDialogue();
+
+        dialoguePanel.SetActive(true);
+        activeCoroutine = StartCoroutine(PlayCorrectFeedback());
+    }
+
+    IEnumerator PlayCorrectFeedback()
+    {
+        yield return StartCoroutine(TypeLine("Correct!"));
+        yield return new WaitForSeconds(0.8f);
+        CloseDialogue();
+    }
+
+    // ================== FINAL (ครบทุกเฟรม) ==================
 
     public void ContinueAfterCorrectAnswer()
     {
-        dialoguePanel.SetActive(true);
+        ForceStopDialogue();
 
-        // หยุด dialogue เดิมก่อน (สำคัญมาก)
-        ClosePanel();
         dialoguePanel.SetActive(true);
-
-        StartDialogueCoroutine(PlayAfterCorrectAnswer());
+        activeCoroutine = StartCoroutine(PlayAfterCorrectAnswer());
     }
-
 
     IEnumerator PlayAfterCorrectAnswer()
     {
-        yield return StartCoroutine(TypeLine("So… are you ready for this adventure?"));
+        yield return StartCoroutine(TypeLine("Correct."));
         yield return new WaitForSeconds(0.4f);
 
-        yield return StartCoroutine(TypeLine("Let’s open the door and begin your ISNE journey!"));
+        yield return StartCoroutine(TypeLine("You understand how this logic gate works."));
         yield return new WaitForSeconds(0.4f);
 
-        ClosePanel();
+        yield return StartCoroutine(TypeLine("This logic is used inside real processors."));
+        yield return new WaitForSeconds(0.4f);
+
+        yield return StartCoroutine(TypeLine("The path forward is now open."));
+        yield return new WaitForSeconds(0.4f);
+
+        CloseDialogue();
+    }
+
+    // ================== FORCE STOP ==================
+
+    public void ForceStopDialogue()
+    {
+        if (activeCoroutine != null)
+            StopCoroutine(activeCoroutine);
+
+        activeCoroutine = null;
+        isTyping = false;
+        skipTyping = false;
     }
 }
