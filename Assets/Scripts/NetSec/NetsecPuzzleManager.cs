@@ -18,12 +18,12 @@ public class NetsecPuzzleManager : MonoBehaviour
     {
         "SEC",
         "NET",
-        "HI",
+        "ISNE",
         "HELLO",
         "CODE",
         "PLAY",
-        "SAFE",
-        "LOCK"
+        "NOTE",
+        "COM"
     };
 
     public string[] possibleKeys =
@@ -31,8 +31,8 @@ public class NetsecPuzzleManager : MonoBehaviour
         "KEY",
         "SAFE",
         "LOCK",
-        "CODE",
-        "PLAY"
+        "HI",
+        "GO"
     };
 
     void Awake()

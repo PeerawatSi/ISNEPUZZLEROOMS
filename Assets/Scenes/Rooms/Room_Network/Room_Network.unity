@@ -6504,7 +6504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f2fab83ff7bc6bf4a9cccab91595fc71, type: 3}
       propertyPath: m_Name
-      value: Y Bot@Walking
+      value: npc
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

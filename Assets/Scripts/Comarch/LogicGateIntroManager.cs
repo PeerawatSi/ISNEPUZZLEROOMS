@@ -15,6 +15,10 @@ public class LogicGateIntroManager : MonoBehaviour
     public GameObject andCard;
     public GameObject orCard;
     public GameObject notCard;
+    public GameObject nandCard;
+    public GameObject norCard;
+    public GameObject xorCard;
+    public GameObject xnorCard;
 
     [Header("Continue Button")]
     public Button continueButton;
@@ -52,6 +56,10 @@ public class LogicGateIntroManager : MonoBehaviour
         andCard.SetActive(false);
         orCard.SetActive(false);
         notCard.SetActive(false);
+        nandCard.SetActive(false);
+        norCard.SetActive(false);
+        xorCard.SetActive(false);
+        xnorCard.SetActive(false);
 
         continueButton.gameObject.SetActive(false);
 
@@ -135,6 +143,10 @@ public class LogicGateIntroManager : MonoBehaviour
         andCard.SetActive(false);
         orCard.SetActive(false);
         notCard.SetActive(false);
+        nandCard.SetActive(false);
+        norCard.SetActive(false);
+        xorCard.SetActive(false);
+        xnorCard.SetActive(false);
 
         if (gateStep == 1)
         {
@@ -151,6 +163,30 @@ public class LogicGateIntroManager : MonoBehaviour
         if (gateStep == 3)
         {
             notCard.SetActive(true);
+            return;
+        }
+
+        if (gateStep == 4)
+        {
+            nandCard.SetActive(true);
+            return;
+        }
+
+        if (gateStep == 5)
+        {
+            norCard.SetActive(true);
+            return;
+        }
+
+        if (gateStep == 6)
+        {
+            xorCard.SetActive(true);
+            return;
+        }
+
+        if (gateStep == 7)
+        {
+            xnorCard.SetActive(true);
             return;
         }
 
