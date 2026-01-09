@@ -2,31 +2,43 @@
 using TMPro;
 using System.Collections;
 
-public class NPCIntroDialogue : MonoBehaviour
+public class NPCIntroTutorial : MonoBehaviour
 {
     public TextMeshPro textMesh;
-    public string[] sentences;
     public float typeSpeed = 0.02f;
 
-    private bool isTyping = false;
-    private bool introDone = false;
+    private bool introPlayed = false;
+
+    void Start()
+    {
+        if (!introPlayed)
+            StartIntro();
+    }
 
     public void StartIntro()
     {
+        introPlayed = true;
         StartCoroutine(ShowIntro());
     }
 
     IEnumerator ShowIntro()
     {
-        yield return StartCoroutine(TypeSentence("Hi, welcome to the ISNE Puzzle Room!"));
+      
+        yield return StartCoroutine(TypeSentence(
+            "Hi, welcome to the ISNE Puzzle Room!"
+        ));
 
         yield return new WaitForSeconds(1.5f);
 
-        yield return StartCoroutine(TypeSentence("Try to Click on me :)"));
+       
+        yield return StartCoroutine(TypeSentence(
+            "Try to Click on me :)"
+        ));
 
-        introDone = true;
-
+        // รอให้อ่าน
         yield return new WaitForSeconds(1f);
+
+        // ลบข้อความออก
         textMesh.text = "";
     }
 
