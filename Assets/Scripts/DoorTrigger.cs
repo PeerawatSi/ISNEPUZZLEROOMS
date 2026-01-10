@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorTrigger : MonoBehaviour
 {
+    private bool isLocked = true;
 
     // ใส่ชื่อ Scene ของแต่ละห้อง
     public string[] roomNames = new string[]
@@ -16,12 +17,27 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (roomNames.Length == 0) return;
+        if (isLocked)
+        {
+            Debug.Log("Door is locked.");
 
-        // สุ่ม index ห้อง
-        int index = Random.Range(0, roomNames.Length);
+        }
+        else
+        {
+            if (roomNames.Length == 0) return;
 
-        // โหลด Scene ตามที่สุ่ม
-        SceneManager.LoadScene(roomNames[index]);
+            // สุ่ม index ห้อง
+            int index = Random.Range(0, roomNames.Length);
+
+            // โหลด Scene ตามที่สุ่ม
+            SceneManager.LoadScene(roomNames[index]);
+            
+        }
+    }
+
+    public void Unlock()
+    {
+        isLocked = false;
+        Debug.Log("Door is unlocked.");
     }
 }

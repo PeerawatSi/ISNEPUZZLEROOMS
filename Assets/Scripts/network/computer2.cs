@@ -46,21 +46,7 @@ public class computer2 : MonoBehaviour
     {
         if(!currentStep)
         {
-            /*
-            if(inputField.text == "192.168.1.0")
-            {
-                Debug.Log("Correct Answer");
-                resultText.gameObject.SetActive(true);
-                resultText.text = "Correct! You may proceed to ping the server.";
-                dialogueText.text = "Enter command to ping the server (serverip: " + networkDialogue.ipaddress + "):";
-                currentStep = true;
-            }else
-            {
-                Debug.Log("Wrong Answer");
-                resultText.gameObject.SetActive(true);
-                resultText.text = "incorrect";
-            }
-            */
+
             // Check if IP address is in correct format: 192.168.1.X
             if(inputField.text.StartsWith("192.168.1."))
             {
@@ -91,6 +77,7 @@ public class computer2 : MonoBehaviour
             }
             else
             {
+                resultText.gameObject.SetActive(true);
                 resultText.text = "Incorrect. IP must start with 192.168.1.";
             }
 

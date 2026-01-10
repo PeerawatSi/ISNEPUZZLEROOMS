@@ -22,6 +22,8 @@ public class NetworkDialogue : MonoBehaviour
     private bool timerStarted = false; 
     private Coroutine activeCoroutine;
 
+    public DoorTrigger door;
+
     public computer1 computer1; // Reference to computer1 script
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -118,6 +120,7 @@ public class NetworkDialogue : MonoBehaviour
         yield return TypeLine("Good job! Now, the door is unlocked. let's continue your journey!");
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         CloseDialogue();
+        door.Unlock();
     }
 
     IEnumerator TypeLine(string line)
