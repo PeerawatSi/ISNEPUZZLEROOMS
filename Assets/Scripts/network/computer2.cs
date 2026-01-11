@@ -60,7 +60,7 @@ public class computer2 : MonoBehaviour
     {
         if(!currentStep)
         {
-            dialogueText.text = "Assign an IP address to this PC.\nFormat: " + networkPrefix + "X (where X is 1-254)\nNote: Don't use the server IP (" + networkDialogue.ipaddress + ")";
+            dialogueText.text = "Assign an IP address to this PC.";
         }
         else
         {

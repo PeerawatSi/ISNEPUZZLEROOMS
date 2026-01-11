@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Threading;
 
 
 public class NetworkDialogue : MonoBehaviour
@@ -116,6 +117,7 @@ public class NetworkDialogue : MonoBehaviour
 
     public IEnumerator OuttroCoroutine()
     {
+        countdownTimer.StopCountdown();
         dialoguePanel.SetActive(true);
         yield return TypeLine("Good job! Now, the door is unlocked. let's continue your journey!");
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
