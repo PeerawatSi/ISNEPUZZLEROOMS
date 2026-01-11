@@ -30,7 +30,7 @@ public class NetworkDialogue : MonoBehaviour
     void Start()
     {
         lastdigit = Random.Range(1, 254);
-        ipaddress = "192.168.1." + lastdigit.ToString();
+        ipaddress = "192."+ Random.Range(1, 254) + "." + Random.Range(1, 254) + "." + lastdigit.ToString();
         dialoguePanel.SetActive(false);
 
         sentences = new string[]

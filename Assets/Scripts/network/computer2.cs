@@ -14,6 +14,7 @@ public class computer2 : MonoBehaviour
     private bool activated = false;
 
     private bool currentStep = false;
+    private string networkPrefix;
 
     void Start()
     {
@@ -34,7 +35,10 @@ public class computer2 : MonoBehaviour
     {
         if(activated)
         {
+           // Calculate network prefix when opening
+           CalculateNetworkPrefix();
            dialoguePanel.SetActive(true);
+           ShowQuestion();
         }
         else
         {
@@ -42,31 +46,52 @@ public class computer2 : MonoBehaviour
         }
     }
 
+    void CalculateNetworkPrefix()
+    {
+        // Extract the first 3 octets from server IP
+        string[] parts = networkDialogue.ipaddress.Split('.');
+        if(parts.Length == 4)
+        {
+            networkPrefix = parts[0] + "." + parts[1] + "." + parts[2] + ".";
+        }
+    }
+
+    void ShowQuestion()
+    {
+        if(!currentStep)
+        {
+            dialogueText.text = "Assign an IP address to this PC.\nFormat: " + networkPrefix + "X (where X is 1-254)\nNote: Don't use the server IP (" + networkDialogue.ipaddress + ")";
+        }
+        else
+        {
+            dialogueText.text = "Enter command to ping the server (Server IP: " + networkDialogue.ipaddress + "):";
+        }
+    }
+
     public void CheckAnswer()
     {
         if(!currentStep)
         {
-
-            // Check if IP address is in correct format: 192.168.1.X
-            if(inputField.text.StartsWith("192.168.1."))
+            // Check if IP address is in correct format: same network as server
+            if(inputField.text.StartsWith(networkPrefix))
             {
                 string[] parts = inputField.text.Split('.');
                 if(parts.Length == 4 && int.TryParse(parts[3], out int lastOctet))
                 {
-                    if(lastOctet >= 0 && lastOctet <= 255 && lastOctet != networkDialogue.lastdigit) // Valid range, not server IP
+                    if(lastOctet >= 1 && lastOctet <= 254 && inputField.text != networkDialogue.ipaddress)
                     {
                         myipaddress = inputField.text;
                         Debug.Log("Correct IP Address: " + myipaddress);
                         resultText.gameObject.SetActive(true);
                         resultText.text = "Correct! IP address assigned: " + myipaddress;
                         inputField.text = "";
-                        dialogueText.text = "Enter command to ping the server (serverip: " + networkDialogue.ipaddress + "):";
                         currentStep = true;
+                        ShowQuestion();
                     }
                     else
                     {
                         resultText.gameObject.SetActive(true);      
-                        resultText.text = "Incorrect. ipaddress shouldn't be the same with server ip.";
+                        resultText.text = "Incorrect. IP shouldn't be the same as server IP and must be 1-254.";
                     }
                 }
                 else
@@ -78,9 +103,8 @@ public class computer2 : MonoBehaviour
             else
             {
                 resultText.gameObject.SetActive(true);
-                resultText.text = "Incorrect. IP must start with 192.168.1.";
+                resultText.text = "Incorrect. IP must start with " + networkPrefix;
             }
-
         }
         else
         {
@@ -91,16 +115,14 @@ public class computer2 : MonoBehaviour
                 resultText.text = "Correct! You have successfully pinged the server.";
                 networkDialogue.Outtro();
                 close();
-                
             }
             else
             {
                 Debug.Log("Wrong Answer");
                 resultText.gameObject.SetActive(true);
-                resultText.text = "incorrect command";
+                resultText.text = "Incorrect command. Use: ping " + networkDialogue.ipaddress;
             }
         }
-        
     }
     
 
@@ -113,5 +135,6 @@ public class computer2 : MonoBehaviour
     public void close()
     {
         dialoguePanel.SetActive(false);
+        currentStep = false; // Reset when closing
     }
 }
