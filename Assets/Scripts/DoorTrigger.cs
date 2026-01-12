@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class DoorTrigger : MonoBehaviour
 {
-
-    // ใส่ชื่อ Scene ของแต่ละห้อง
-    public string[] roomNames = new string[]
+    // รายชื่อห้องทั้งหมด
+    public static List<string> remainingRooms = new List<string>()
     {
         "Room_NetworkSecurity",
         "Room_ComputerArchitecture",
@@ -16,12 +16,23 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (roomNames.Length == 0) return;
+        // ถ้าเล่นครบทุกห้องแล้ว
+        if (remainingRooms.Count == 0)
+        {
+            Debug.Log("All rooms completed!");
+            return;
+        }
 
-        // สุ่ม index ห้อง
-        int index = Random.Range(0, roomNames.Length);
+        // สุ่ม index จากห้องที่เหลือ
+        int index = Random.Range(0, remainingRooms.Count);
 
-        // โหลด Scene ตามที่สุ่ม
-        SceneManager.LoadScene(roomNames[index]);
+        // เลือกห้อง
+        string selectedRoom = remainingRooms[index];
+
+        // ลบห้องนี้ออก (กันซ้ำ)
+        remainingRooms.RemoveAt(index);
+
+        // โหลด Scene
+        SceneManager.LoadScene(selectedRoom);
     }
 }
