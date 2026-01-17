@@ -791,6 +791,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -812,6 +814,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -862,16 +865,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 124525129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 715f466f93e3a9e40a85daa7c9e4cfc3, type: 3}
+  m_Script: {fileID: 11500000, guid: e582d414bb5304c4e82710ea6ee5fe24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkDialogue: {fileID: 0}
-  dialoguePanel: {fileID: 1727454917}
-  dialogueText: {fileID: 403074578}
-  resultText: {fileID: 1729713449}
-  inputField: {fileID: 868799359}
-  submitButton: {fileID: 544329645}
-  closeButton: {fileID: 442130818}
+  networkDialogue: {fileID: 2006863475}
+  com2Panel: {fileID: 65887666}
+  com2Text: {fileID: 1729713449}
+  com2resultText: {fileID: 445944978}
+  com2inputField: {fileID: 868799359}
+  com2submitButton: {fileID: 544329645}
+  com2closeButton: {fileID: 442130818}
 --- !u!1 &130798771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2297,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -2302,6 +2304,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1001 &431681916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2521,7 +2524,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 124525138}
         m_TargetAssemblyTypeName: computer2, Assembly-CSharp
         m_MethodName: close
         m_Mode: 1
@@ -2637,8 +2640,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2773,8 +2776,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2926,7 +2929,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2006863475}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IntroDialogue, Assembly-CSharp
         m_MethodName: ClosePanel
         m_Mode: 1
@@ -3098,7 +3101,7 @@ GameObject:
   - component: {fileID: 511353889}
   - component: {fileID: 511353888}
   m_Layer: 5
-  m_Name: closeButton
+  m_Name: closeButton1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3168,7 +3171,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1415953173}
         m_TargetAssemblyTypeName: computer1, Assembly-CSharp
         m_MethodName: close
         m_Mode: 1
@@ -3437,7 +3440,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 124525138}
         m_TargetAssemblyTypeName: computer2, Assembly-CSharp
         m_MethodName: CheckAnswer
         m_Mode: 1
@@ -3548,6 +3551,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3569,6 +3574,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -4691,8 +4697,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5398,6 +5404,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5419,6 +5427,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -5445,11 +5454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4017324689983159481, guid: 470e9283318c23b408d36901ecfc8fdf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 576
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4017324689983159481, guid: 470e9283318c23b408d36901ecfc8fdf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.545
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 4017324689983159481, guid: 470e9283318c23b408d36901ecfc8fdf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6105,6 +6114,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6126,6 +6137,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -6881,8 +6893,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3701295584102665243, guid: 49a63a9b4e65a1549adadf0b8bd6d404, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1105808447958256667, guid: 49a63a9b4e65a1549adadf0b8bd6d404, type: 3}
@@ -7563,9 +7574,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 895627603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11bea224deab16e458618e3f93f440ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a41a9cbf1641e141ba3ef00aa5bf099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkDialogue: {fileID: 2006863475}
+  com1Panel: {fileID: 1448788643}
+  com1Text: {fileID: 477051217}
+  com1resultText: {fileID: 792716775}
+  com1inputField: {fileID: 358522577}
+  com1submitButton: {fileID: 1734351338}
+  com1closeButton: {fileID: 511353888}
+  computer2: {fileID: 124525138}
 --- !u!1001 &1440738290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8144,19 +8163,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.39
+      value: -3.134
       objectReference: {fileID: 0}
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.2383065
+      value: 1.54
       objectReference: {fileID: 0}
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.5183496
+      value: -9.356
       objectReference: {fileID: 0}
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8164,7 +8183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalRotation.z
@@ -8176,7 +8195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4898047380936196971, guid: 93f2e172ff93b5f4cbe5c37f60797ffc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -8933,10 +8952,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1551056736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52b69e64cab13aa4ea660e150e4cfdba, type: 3}
+  m_Script: {fileID: 11500000, guid: 53004a00231b2414b8aeaec0d36542ad, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  networkDialogue: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::networkTrigger
+  networkDialogue: {fileID: 2006863475}
 --- !u!1001 &1663272406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9252,8 +9271,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9335,7 +9354,7 @@ GameObject:
   - component: {fileID: 1734351339}
   - component: {fileID: 1734351338}
   m_Layer: 5
-  m_Name: submitButton
+  m_Name: submitButton1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9405,7 +9424,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1415953173}
         m_TargetAssemblyTypeName: computer1, Assembly-CSharp
         m_MethodName: CheckAnswer
         m_Mode: 1
@@ -9995,6 +10014,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10016,6 +10037,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -10331,11 +10353,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e7aacb82296e75c41acea0abba4c8978, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4687
+      value: 2.4686985
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e7aacb82296e75c41acea0abba4c8978, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 0.69999886
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e7aacb82296e75c41acea0abba4c8978, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10347,7 +10369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e7aacb82296e75c41acea0abba4c8978, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e7aacb82296e75c41acea0abba4c8978, type: 3}
       propertyPath: m_LocalRotation.y
@@ -10413,7 +10435,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932081585}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c582bdf20148fd84aa8ed4a3997b76c6, type: 3}
   m_Name: 
@@ -10690,15 +10712,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006863473}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 733ccf8dced4f0243bf097c70efeb129, type: 3}
+  m_Script: {fileID: 11500000, guid: 08f7721868ae46740941b54e4ec75584, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  dialoguePanel: {fileID: 2006863473}
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkDialogue
+  dialoguePanel: {fileID: 1727454917}
   dialogueText: {fileID: 403074578}
-  okButton: {fileID: 0}
   countdownTimer: {fileID: 764501559}
+  closeButton: {fileID: 511353886}
+  lastdigit: 0
+  ipaddress: 
+  sentences: []
+  door: {fileID: 1932081587}
+  computer1: {fileID: 1415953173}
 --- !u!1001 &2013559711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11535,17 +11562,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 3
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
   m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!108 &2127043738
 Light:
   m_ObjectHideFlags: 0
@@ -11634,7 +11667,6 @@ SceneRoots:
   - {fileID: 2127043739}
   - {fileID: 554285399}
   - {fileID: 1814084164}
-  - {fileID: 1932081584}
   - {fileID: 1366524669}
   - {fileID: 1167339152}
   - {fileID: 1754426507}
@@ -11730,4 +11762,5 @@ SceneRoots:
   - {fileID: 88441852}
   - {fileID: 1611134896}
   - {fileID: 438659207}
+  - {fileID: 1932081584}
   - {fileID: 1459744065}

@@ -5,6 +5,7 @@ using System.Collections;
 public class AlgoDialogue : MonoBehaviour
 {
     [Header("UI Elements")]
+    public DoorTrigger door;
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
 
@@ -159,6 +160,7 @@ public class AlgoDialogue : MonoBehaviour
         yield return StartCoroutine(TypeLine("You are SOOO GOOOOD!!!"));
         yield return new WaitForSeconds(0.6f);
         CloseDialogue();
+        door.Unlock();
     }
 
     public void ShowWrongAnswer()

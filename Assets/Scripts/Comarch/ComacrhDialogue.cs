@@ -5,6 +5,7 @@ using System.Collections;
 public class ComacrhDialogue : MonoBehaviour
 {
     [Header("UI Elements")]
+    public DoorTrigger door; // ⭐ ประตูที่ต้องเปิด
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
 
@@ -208,6 +209,8 @@ public class ComacrhDialogue : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         CloseDialogue();
+        door.Unlock();
+        
     }
 
     // ================== FORCE STOP ==================

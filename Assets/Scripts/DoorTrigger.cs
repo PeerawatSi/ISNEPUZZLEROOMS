@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class DoorTrigger : MonoBehaviour
 {
+    private bool isLocked = true;
     // รายชื่อห้องทั้งหมด
     public static List<string> remainingRooms = new List<string>()
     {
@@ -16,23 +17,37 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // ถ้าเล่นครบทุกห้องแล้ว
-        if (remainingRooms.Count == 0)
+        if(isLocked)
         {
-            Debug.Log("All rooms completed!");
+            Debug.Log("The door is locked.");
             return;
         }
+        else
+        {
+            // ถ้าเล่นครบทุกห้องแล้ว
+            if (remainingRooms.Count == 0)
+            {
+                Debug.Log("All rooms completed!");
+                return;
+            }
 
-        // สุ่ม index จากห้องที่เหลือ
-        int index = Random.Range(0, remainingRooms.Count);
+            // สุ่ม index จากห้องที่เหลือ
+            int index = Random.Range(0, remainingRooms.Count);
 
-        // เลือกห้อง
-        string selectedRoom = remainingRooms[index];
+            // เลือกห้อง
+            string selectedRoom = remainingRooms[index];
 
-        // ลบห้องนี้ออก (กันซ้ำ)
-        remainingRooms.RemoveAt(index);
+            // ลบห้องนี้ออก (กันซ้ำ)
+            remainingRooms.RemoveAt(index);
 
-        // โหลด Scene
-        SceneManager.LoadScene(selectedRoom);
+            // โหลด Scene
+            SceneManager.LoadScene(selectedRoom);
+            
+        }
+    }
+
+    public void Unlock()
+    {
+        isLocked = false;
     }
 }

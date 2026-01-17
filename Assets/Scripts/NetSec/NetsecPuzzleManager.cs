@@ -4,6 +4,7 @@ public class NetsecPuzzleManager : MonoBehaviour
 {
     public static NetsecPuzzleManager Instance;
     public bool PuzzleSolved { get; private set; } = false;
+    public DoorTrigger door;
 
 
     [Header("Game Data")]
@@ -70,6 +71,7 @@ public class NetsecPuzzleManager : MonoBehaviour
     {
         PuzzleSolved = true;
         Debug.Log("PUZZLE SOLVED → DOOR UNLOCKED");
+        door.Unlock();
     }
 
 }

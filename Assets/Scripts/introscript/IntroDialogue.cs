@@ -5,6 +5,8 @@ using System.Collections;
 public class IntroDialogue : MonoBehaviour
 {
     [Header("UI Elements")]
+
+    public DoorTrigger door;
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public GameObject okButton;
@@ -179,5 +181,6 @@ public class IntroDialogue : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         ClosePanel();
+        door.Unlock();
     }
 }

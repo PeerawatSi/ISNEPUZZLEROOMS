@@ -5,6 +5,7 @@ using System.Collections;
 public class NetsecDialogue : MonoBehaviour
 {
     [Header("UI Elements")]
+    
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
 
